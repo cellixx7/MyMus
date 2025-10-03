@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyMus</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <button class="menu-btn" aria-label="Abrir menu">
+      <span class="hamburger"></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="logo-placeholder">LOGO</div>
+  </nav>
+
+  <aside class="sidebar">
+    <button class="close-btn" aria-label="Fechar menu">&times;</button>
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <div class="logo-hero">LOGO</div>
+        <h1 class="hero-title">MyMus</h1>
+        <p class="hero-subtitle">Melhor plataforma musical</p>
+        <a href="#sobre" class="down-arrow" aria-label="Ir para Sobre Nós">
+          <!-- SVG seta para baixo -->
+          <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M12 5v14M19 12l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>
+        A MyMus é a melhor plataforma musical para você descobrir, ouvir e compartilhar músicas. Nossa missão é conectar pessoas através da música, oferecendo uma experiência moderna, intuitiva e personalizada.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
