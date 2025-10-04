@@ -1,51 +1,85 @@
 // Aguarda o carregamento completo do conteúdo da página
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona o elemento <p> dentro do container
-    const welcomeMessage = document.querySelector('.container p');
-    // Altera o texto da mensagem de boas-vindas
-    welcomeMessage.textContent = 'Explore a world of music at your fingertips!';
-
     // Seleciona elementos para controle da sidebar
     const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.getElementById('toggleSidebar');
-    const body = document.body;
-
-    // Função para alternar a sidebar
-    toggleBtn.addEventListener('click', function() {
-        sidebar.classList.toggle('closed');
-        body.classList.toggle('sidebar-closed');
-    });
-
-    // Menu lateral responsivo
     const menuBtn = document.querySelector('.menu-btn');
     const closeBtn = document.querySelector('.close-btn');
+    const overlay = document.querySelector('.sidebar-overlay');
 
-    menuBtn.addEventListener('click', () => {
+    menuBtn.addEventListener('click', function() {
         sidebar.classList.add('open');
+        overlay.classList.add('active');
     });
 
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', function() {
         sidebar.classList.remove('open');
+        overlay.classList.remove('active');
     });
 
-    // Fecha sidebar ao clicar fora dela
-    document.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
             sidebar.classList.remove('open');
+            overlay.classList.remove('active');
         }
     });
 
-    // Scroll suave para âncoras
+    // Scroll suave com animação mais fluida
+    function smoothScrollTo(selector) {
+        const target = document.querySelector(selector);
+        if (target) {
+            const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+            const targetY = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
+
+            const startY = window.scrollY;
+            const distance = targetY - startY;
+            const duration = 700;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+
+                // Ease-in-out
+                const ease = progress < 0.5
+                    ? 2 * progress * progress
+                    : -1 + (4 - 2 * progress) * progress;
+
+                window.scrollTo(0, startY + distance * ease);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animation);
+                }
+            }
+
+            requestAnimationFrame(animation);
+        }
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
+                smoothScrollTo(href);
                 sidebar.classList.remove('open');
             }
         });
     });
 
+    // Link para a seção "Sobre" ao clicar na logo do hero
+    const logoHeroImg = document.getElementById('logo-hero-img');
+    if (logoHeroImg) {
+        logoHeroImg.addEventListener('click', function() {
+            smoothScrollTo('#sobre');
+        });
+    }
+
     // Funcionalidades adicionais podem ser adicionadas aqui
 });
+

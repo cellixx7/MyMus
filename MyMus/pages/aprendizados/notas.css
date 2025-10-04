@@ -1,0 +1,108 @@
+/* Importa o CSS global */
+@import url("../../style.css");
+
+/* Estilos específicos para a página de Notas */
+.notes-content {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.notes-content h2 {
+  color: #3573d6;
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  margin-top: 1.5rem;
+}
+
+.notes-content ul {
+  margin: 1rem 0 2rem 2rem;
+  color: #222;
+  font-size: 1.1rem;
+}
+
+.notes-image {
+  display: block;
+  margin: 2rem auto;
+  max-width: 320px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.12);
+}
+
+.identificador-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.piano {
+  position: relative;
+  width: 420px;
+  height: 120px;
+  margin: 2rem auto 1rem auto;
+  display: flex;
+}
+
+.key {
+  position: relative;
+  border: 1px solid #222;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.key.white {
+  width: 48px;
+  height: 120px;
+  background: #f8f8f8;
+  z-index: 1;
+  margin-right: -1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.key.black {
+  width: 28px;
+  height: 70px;
+  background: #222;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  margin-left: -14px;
+  border-radius: 0 0 6px 6px;
+}
+
+.key.white:active, .key.white.selected {
+  background: #a1e3ff;
+  transform: scale(1.05);
+}
+
+.key.black:active, .key.black.selected {
+  background: #3573d6;
+  transform: scale(1.08);
+}
+
+.key[data-note="C#"] { left: 34px; }
+.key[data-note="D#"] { left: 82px; }
+.key[data-note="F#"] { left: 178px; }
+.key[data-note="G#"] { left: 226px; }
+.key[data-note="A#"] { left: 274px; }
+
+.resultado-nota {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #3573d6;
+  font-weight: bold;
+}

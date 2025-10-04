@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas Musicais | MyMus</title>
+  <link rel="icon" type="image/png" href="../../logo-navbar.png">
+  <link rel="stylesheet" href="notas.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <button class="menu-btn" aria-label="Abrir menu">
+      <span class="hamburger"></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li> 
+    </ul>
+    <div class="logo-placeholder">
+      <img src="logo-navbar.png" alt="Logo MyMus Navbar" style="height:50px; width:50px;">
+    </div>
+  </nav>
+
+  <div class="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <button class="close-btn" aria-label="Fechar menu">&times;</button>
+    <div class="sidebar-user">
+      <img src="avatar.png" alt="Avatar do usuário" class="sidebar-avatar">
+      <span class="sidebar-username">Olá, Usuário!</span>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Aprendizado</span>
+      <ul>
+        <li><a href="notas.html">Notas</a></li>
+        <li><a href="#">Intervalos</a></li>
+        <li><a href="#">Acordes</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Ferramentas</span>
+      <ul>
+        <li><a href="#">Afinador</a></li>
+        <li><a href="#">Metrônomo</a></li>
+        <li><a href="#">Gerador de Cifra</a></li>
+        <li><a href="#">Gerador de Tablaturas</a></li>
+        <li><a href="#">Gerador de Partituras</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Suporte</span>
+      <ul>
+        <li><a href="#">Suporte</a></li>
+        <li><a href="#">Feedback do Site</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <section class="page-header">
+      <h1 class="page-title">Notas Musicais</h1>
+      <p class="page-description">
+        Aprenda sobre as notas musicais, sua representação, ordem e como identificá-las em diferentes instrumentos.
+      </p>
+    </section>
+
+    <!-- Identificador de Notas -->
+    <section class="identificador-container">
+      <h1>Identificador de Notas</h1>
+      <p>Clique em uma tecla do piano para identificar a nota:</p>
+      <div class="piano">
+        <div class="key white" data-note="C">C</div>
+        <div class="key black" data-note="C#"></div>
+        <div class="key white" data-note="D">D</div>
+        <div class="key black" data-note="D#"></div>
+        <div class="key white" data-note="E">E</div>
+        <div class="key white" data-note="F">F</div>
+        <div class="key black" data-note="F#"></div>
+        <div class="key white" data-note="G">G</div>
+        <div class="key black" data-note="G#"></div>
+        <div class="key white" data-note="A">A</div>
+        <div class="key black" data-note="A#"></div>
+        <div class="key white" data-note="B">B</div>
+      </div>
+      <div class="resultado-nota" id="resultadoNota">Clique em uma tecla!</div>
+    </section>
+  </main>
+
+  <script src="identificador-notas.js"></script>
+  <script src="script-notas.js"></script>
+</body>
+</html>

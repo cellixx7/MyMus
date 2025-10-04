@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo-navbar.png">
   <title>MyMus</title>
   <link rel="stylesheet" href="style.css">
   <!-- Google Fonts -->
@@ -16,25 +17,73 @@
     <ul class="nav-links">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#contato">Contato</a></li>
+      <li><a href="#contato">Contato</a></li> 
     </ul>
-    <div class="logo-placeholder">LOGO</div>
+    <div class="logo-placeholder">
+      <img src="logo-navbar.png" alt="Logo MyMus Navbar" style="height:50px; width:50px;">
+    </div>
   </nav>
+
+  <!-- Overlay para escurecer fundo -->
+  <div class="sidebar-overlay"></div>
 
   <aside class="sidebar">
     <button class="close-btn" aria-label="Fechar menu">&times;</button>
-    <ul>
-      <li><a href="#inicio">Início</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
+    <div class="sidebar-user">
+      <img src="avatar.png" alt="Avatar do usuário" class="sidebar-avatar">
+      <span class="sidebar-username">Olá, Usuário!</span>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Aprendizado</span>
+      <ul>
+        <li><a href="pages/aprendizados/notas.html">Notas</a></li>
+        <li><a href="#">Intervalos</a></li>
+        <li><a href="#">Acordes</a></li>
+        <li><a href="#">Escalas</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Ferramentas</span>
+      <ul>
+        <li><a href="#">Metrônomo</a></li>
+        <li><a href="#">Afinador</a></li>
+        <li><a href="#">Gerador de Tablatura</a></li>
+        <li><a href="#">Gerador de Partitura</a></li>
+        <li><a href="#">Caixa de ritmo</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Instrumentos</span>
+      <ul>
+        <li><a href="#">Piano</a></li>
+        <li><a href="#">Guitarra/Violão</a></li>
+        <li><a href="#">Baixo</a></li>
+        <li><a href="#">Bateria</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Outros</span>
+      <ul>
+        <li><a href="#">Círculo de Quintas</a></li>
+        <li><a href="#">Termos musicais</a></li>
+        <li><a href="#">Folhas de Pauta</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Suporte</span>
+      <ul>
+        <li><a href="#">Avalie-nos</a></li>
+        <li><a href="#">Contate-nos</a></li>
+      </ul>
+    </div>
   </aside>
 
   <main>
     <section class="hero" id="inicio">
       <div class="hero-content">
-        <div class="logo-hero">LOGO</div>
-        <h1 class="hero-title">MyMus</h1>
+        <div class="logo-hero">
+          <img src="logo-hero.png" alt="Logo MyMus Hero" id="logo-hero-img">
+        </div>
         <p class="hero-subtitle">Melhor plataforma musical</p>
         <a href="#sobre" class="down-arrow" aria-label="Ir para Sobre Nós">
           <!-- SVG seta para baixo -->
