@@ -5,43 +5,42 @@
   padding: 0;
 }
 
+/* Corpo da página centralizado e fundo escuro */
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background: #0e0e0e;
-  color: #222;
+  background: #000000e3;
+  color: #ffffff;
   min-height: 100vh;
   display: flex;
   align-items: center;   /* Centraliza verticalmente */
   justify-content: center; /* Centraliza horizontalmente */
 }
 
-/* Navbar */
+/* Navbar fixa no topo, com sombra e espaçamento */
 .navbar {
   position: fixed;
-  top: 15px; /* Espaço superior */
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 30px); /* Espaço lateral: 15px de cada lado */
+  width: calc(100% - 30px);
   max-width: calc(1200px - 30px);
   background: #3573d6;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.384);
   border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Alinha itens à esquerda */
-  padding: 0.5rem 15px; /* Espaço interno nas laterais */
-  margin: 0 15px; /* Espaço inferior e lateral */
+  justify-content: flex-start;
+  padding: 0.5rem 15px;
+  margin: 0 15px;
   z-index: 100;
   transition: box-shadow 0.3s;
-  gap: 0.5rem; /* Espaço entre elementos principais */
+  gap: 0.5rem;
 }
 
+/* Botão do menu lateral */
 .menu-btn {
-  margin-right: 0.5rem; /* Espaço entre menu e links */
-}
-
-.menu-btn {
-  color: #fff;
+  margin-right: 0.5rem;
+  color: #ffffff;
   border: none;
   cursor: pointer;
   padding: 1rem;
@@ -49,15 +48,16 @@ body {
   transition: transform 0.2s;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.18);
+  box-shadow: 0 2px 8px rgba(79, 141, 255, 0);
 }
 
 .menu-btn:hover, .menu-btn:focus {
-  color: #fff;
+  color: #000000;
   box-shadow: 0 4px 12px rgba(79, 140, 255, 0.28);
   transform: scale(1.08);
 }
 
+/* Ícone hamburger animado */
 .hamburger,
 .hamburger::before,
 .hamburger::after {
@@ -65,7 +65,7 @@ body {
   display: block;
   width: 24px;
   height: 3px;
-  background: #3573d6;
+  background: #000000;
   border-radius: 2px;
   position: relative;
   transition: all 0.3s;
@@ -79,16 +79,17 @@ body {
   top: 8px;
 }
 
+/* Links do menu principal */
 .nav-links {
   display: flex;
-  gap: 3px; /* Espaço entre botões */
+  gap: 3px;
   list-style: none;
-  margin-right: auto; /* Empurra logo para a direita */
+  margin-right: auto;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #222;
+  color: #ffffff;
   font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
   font-weight: 700;
   font-size: 1rem;
@@ -102,22 +103,23 @@ body {
   color: #fff;
 }
 
+/* Logo no menu */
 .logo-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 44px; /* 10% maior */
+  height: 44px;
   width: 44px;
   padding: 0.25rem;
   border-radius: 8px;
-  margin-left: auto; /* Mantém logo à direita */
+  margin-left: auto;
   background: transparent;
   box-shadow: none;
   transition: transform 0.2s;
 }
 
 .logo-placeholder img {
-  height: 55px; /* 10% maior */
+  height: 55px;
   width: 55px;
   object-fit: contain;
   transition: transform 0.3s;
@@ -127,11 +129,11 @@ body {
   transform: scale(1.08) rotate(-6deg);
 }
 
-/* Sidebar (mobile menu) */
+/* Sidebar lateral animada */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -300px;
+  left: -300px; /* Escondida inicialmente */
   width: 270px;
   height: 100vh;
   background: #181f2a;
@@ -145,8 +147,10 @@ body {
   gap: 2rem;
 }
 
+/* Sidebar aberta */
 .sidebar.open {
   left: 0;
+  transition: left 0.35s cubic-bezier(.77,0,.18,1);
 }
 
 /* Overlay escuro ao abrir sidebar */
@@ -167,7 +171,7 @@ body {
   pointer-events: all;
 }
 
-/* Botão de fechar */
+/* Botão de fechar sidebar */
 .close-btn {
   background: none;
   border: none;
@@ -182,7 +186,7 @@ body {
   color: #4f8cff;
 }
 
-/* Usuário */
+/* Usuário na sidebar */
 .sidebar-user {
   display: flex;
   align-items: center;
@@ -206,7 +210,7 @@ body {
   font-size: 1.1rem;
 }
 
-/* Categorias */
+/* Títulos das seções da sidebar */
 .sidebar-section-title {
   color: #a1e3ff;
   font-size: 1.08rem;
@@ -238,7 +242,7 @@ body {
   color: #fff;
 }
 
-/* Hero Section */
+/* Hero Section centralizada */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -256,21 +260,21 @@ body {
   gap: 1.5rem;
 }
 
+/* Logo grande na página inicial */
 .logo-hero {
   height: 180px;
   width: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.1rem 1.2rem; /* 10% maior */
+  padding: 1.1rem 1.2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.12);
-  margin-bottom: 0.5rem; /* Diminui o espaçamento abaixo da logo */
+  margin-bottom: 0.5rem;
   transition: box-shadow 0.3s;
 }
 
 .logo-hero img {
-  height: 180px; /* 10% maior */
+  height: 180px;
   width: 180px;
   object-fit: contain;
   transition: transform 0.3s;
@@ -280,7 +284,17 @@ body {
   transform: scale(1.25);
 }
 
+/* Título principal centralizado, branco e bold */
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+}
 
+/* Subtítulo */
 .hero-subtitle {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 1.2rem;
@@ -288,6 +302,7 @@ body {
   color: #eaf6ff;
 }
 
+/* Seta animada para baixo */
 .down-arrow {
   margin-top: 2rem;
   display: inline-block;

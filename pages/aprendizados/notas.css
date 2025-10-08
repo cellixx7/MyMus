@@ -1,77 +1,92 @@
 @import url("../../style.css");
 
+/* Container principal */
 .identificador-container {
-  background: #fff;
+  background: #ffffff00;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(79,140,255,0.10);
   padding: 2rem;
-  max-width: 600px;
+  max-width: 950px;
   margin: 2rem auto;
   text-align: center;
 }
 
+/* Piano */
 .piano {
   position: relative;
-  width: 420px;
-  height: 120px;
-  margin: 2rem auto 1rem auto;
-  display: flex;
-}
-
-.key {
-  position: relative;
-  border: 1px solid #222;
-  box-sizing: border-box;
-  cursor: pointer;
+  margin: 2rem auto;
   user-select: none;
-  transition: background 0.2s, transform 0.1s;
+  touch-action: manipulation;
+  width: 100%;
+  max-width: 1000px;
+  height: 200px;
+  overflow-x: auto;
 }
 
+/* Contêiner de teclas */
+.keys {
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+/* Teclas brancas */
 .key.white {
   width: 48px;
-  height: 120px;
-  background: #f8f8f8;
-  z-index: 1;
-  margin-right: -1px;
+  height: 100%;
+  background: linear-gradient(to bottom, #fff, #eaeaea);
+  border: 1px solid #ccc;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
-  font-family: 'Poppins', Arial, sans-serif;
+  align-items: flex-end;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  color: #555;
+  margin-right: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.1s;
+  z-index: 1;
 }
 
+.key.white.selected, .key.white.active {
+  background: #a1e3ff;
+}
+
+/* Teclas pretas */
 .key.black {
-  width: 28px;
-  height: 70px;
-  background: #222;
+  width: 32px;
+  height: 60%;
+  background: linear-gradient(to bottom, #333, #000);
+  border-radius: 0 0 4px 4px;
   position: absolute;
   top: 0;
   z-index: 2;
-  margin-left: -14px;
-  border-radius: 0 0 6px 6px;
+  cursor: pointer;
+  transition: background 0.1s;
 }
 
-.key.white:active, .key.white.selected {
-  background: #a1e3ff;
-  transform: scale(1.05);
-}
-
-.key.black:active, .key.black.selected {
+.key.black.selected, .key.black.active {
   background: #3573d6;
-  transform: scale(1.08);
 }
 
-.key[data-note="C#4"] { left: 34px; }
-.key[data-note="D#4"] { left: 82px; }
-.key[data-note="F#4"] { left: 178px; }
-.key[data-note="G#4"] { left: 226px; }
-.key[data-note="A#4"] { left: 274px; }
-
+/* Resultado da nota */
 .resultado-nota {
   margin-top: 1.5rem;
   font-size: 1.3rem;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #3573d6;
   font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .piano {
+    height: 150px;
+  }
+  .key.white {
+    width: 36px;
+  }
+  .key.black {
+    width: 22px;
+  }
 }

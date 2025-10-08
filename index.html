@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Navbar principal -->
   <nav class="navbar">
     <button class="menu-btn" aria-label="Abrir menu">
       <span class="hamburger"></span>
@@ -27,6 +28,7 @@
   <!-- Overlay para escurecer fundo -->
   <div class="sidebar-overlay"></div>
 
+  <!-- Sidebar lateral única -->
   <aside class="sidebar">
     <button class="close-btn" aria-label="Fechar menu">&times;</button>
     <div class="sidebar-user">
@@ -76,6 +78,21 @@
         <li><a href="#">Contate-nos</a></li>
       </ul>
     </div>
+    <!-- Adiciona as funções principais do site na barra lateral -->
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Funções Rápidas</span>
+      <ul>
+        <li><a href="#" id="homeBtn">Início</a></li>
+        <li><a href="#" id="libraryBtn">Biblioteca</a></li>
+        <li><a href="#" id="intervalsBtn">Intervalos</a></li>
+        <li><a href="#" id="notesBtn">Notas</a></li>
+        <li><a href="#" id="chordsBtn">Acordes</a></li>
+        <li><a href="#" id="scoreBtn">Criador de Partituras</a></li>
+        <li><a href="#" id="tabBtn">Criador de Tablaturas</a></li>
+        <li><a href="#" id="playlistBtn">Playlists</a></li>
+        <li><a href="#" id="settingsBtn">Configurações</a></li>
+      </ul>
+    </div>
   </aside>
 
   <main>
@@ -85,6 +102,7 @@
           <img src="logo-hero.png" alt="Logo MyMus Hero" id="logo-hero-img">
         </div>
         <p class="hero-subtitle">Melhor plataforma musical</p>
+        <div></div>
         <a href="#sobre" class="down-arrow" aria-label="Ir para Sobre Nós">
           <!-- SVG seta para baixo -->
           <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -101,20 +119,6 @@
       </p>
     </section>
   </main>
-
-  <nav class="sidebar">
-    <ul>
-        <li><a href="#" id="homeBtn">Início</a></li>
-        <li><a href="#" id="libraryBtn">Biblioteca</a></li>
-        <li><a href="#" id="intervalsBtn">Intervalos</a></li>
-        <li><a href="#" id="notesBtn">Notas</a></li>
-        <li><a href="#" id="chordsBtn">Acordes</a></li>
-        <li><a href="#" id="scoreBtn">Criador de Partituras</a></li>
-        <li><a href="#" id="tabBtn">Criador de Tablaturas</a></li>
-        <li><a href="#" id="playlistBtn">Playlists</a></li>
-        <li><a href="#" id="settingsBtn">Configurações</a></li>
-    </ul>
-</nav>
 
   <script src="script.js"></script>
 </body>
