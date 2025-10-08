@@ -1,35 +1,4 @@
-/* Importa o CSS global */
 @import url("../../style.css");
-
-/* Estilos específicos para a página de Notas */
-.notes-content {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(79,140,255,0.10);
-  padding: 2rem;
-  max-width: 700px;
-  margin: 2rem auto;
-}
-
-.notes-content h2 {
-  color: #3573d6;
-  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
-  margin-top: 1.5rem;
-}
-
-.notes-content ul {
-  margin: 1rem 0 2rem 2rem;
-  color: #222;
-  font-size: 1.1rem;
-}
-
-.notes-image {
-  display: block;
-  margin: 2rem auto;
-  max-width: 320px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(79,140,255,0.12);
-}
 
 .identificador-container {
   background: #fff;
@@ -93,11 +62,11 @@
   transform: scale(1.08);
 }
 
-.key[data-note="C#"] { left: 34px; }
-.key[data-note="D#"] { left: 82px; }
-.key[data-note="F#"] { left: 178px; }
-.key[data-note="G#"] { left: 226px; }
-.key[data-note="A#"] { left: 274px; }
+.key[data-note="C#4"] { left: 34px; }
+.key[data-note="D#4"] { left: 82px; }
+.key[data-note="F#4"] { left: 178px; }
+.key[data-note="G#4"] { left: 226px; }
+.key[data-note="A#4"] { left: 274px; }
 
 .resultado-nota {
   margin-top: 1.5rem;

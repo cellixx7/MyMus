@@ -6,8 +6,10 @@
   <title>Notas Musicais | MyMus</title>
   <link rel="icon" type="image/png" href="../../logo-navbar.png">
   <link rel="stylesheet" href="notas.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Biblioteca Tone.js para reprodução de som -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -34,7 +36,7 @@
     <div class="sidebar-section">
       <span class="sidebar-section-title">Aprendizado</span>
       <ul>
-        <li><a href="notas.html">Notas</a></li>
+        <li><a href="notas.html" class="active">Notas</a></li>
         <li><a href="#">Intervalos</a></li>
         <li><a href="#">Acordes</a></li>
       </ul>
@@ -62,33 +64,32 @@
     <section class="page-header">
       <h1 class="page-title">Notas Musicais</h1>
       <p class="page-description">
-        Aprenda sobre as notas musicais, sua representação, ordem e como identificá-las em diferentes instrumentos.
+        Explore o som e aprenda as notas musicais interativamente.
       </p>
     </section>
 
     <!-- Identificador de Notas -->
     <section class="identificador-container">
       <h1>Identificador de Notas</h1>
-      <p>Clique em uma tecla do piano para identificar a nota:</p>
+      <p>Clique em uma tecla do piano para ouvir e identificar a nota:</p>
       <div class="piano">
-        <div class="key white" data-note="C">C</div>
-        <div class="key black" data-note="C#"></div>
-        <div class="key white" data-note="D">D</div>
-        <div class="key black" data-note="D#"></div>
-        <div class="key white" data-note="E">E</div>
-        <div class="key white" data-note="F">F</div>
-        <div class="key black" data-note="F#"></div>
-        <div class="key white" data-note="G">G</div>
-        <div class="key black" data-note="G#"></div>
-        <div class="key white" data-note="A">A</div>
-        <div class="key black" data-note="A#"></div>
-        <div class="key white" data-note="B">B</div>
+        <div class="key white" data-note="C4">C</div>
+        <div class="key black" data-note="C#4"></div>
+        <div class="key white" data-note="D4">D</div>
+        <div class="key black" data-note="D#4"></div>
+        <div class="key white" data-note="E4">E</div>
+        <div class="key white" data-note="F4">F</div>
+        <div class="key black" data-note="F#4"></div>
+        <div class="key white" data-note="G4">G</div>
+        <div class="key black" data-note="G#4"></div>
+        <div class="key white" data-note="A4">A</div>
+        <div class="key black" data-note="A#4"></div>
+        <div class="key white" data-note="B4">B</div>
       </div>
       <div class="resultado-nota" id="resultadoNota">Clique em uma tecla!</div>
     </section>
   </main>
 
-  <script src="identificador-notas.js"></script>
   <script src="script-notas.js"></script>
 </body>
 </html>
