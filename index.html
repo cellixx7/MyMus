@@ -15,7 +15,7 @@
     <!-- Botão do menu (logo pequeno) -->
     <button class="menu-btn" aria-label="Abrir menu">
       <img src="assets/Design MyMus/logo-navbar.png" alt="MyMus" class="menu-logo">
-    </button>
+    </button> 
 
     <!-- Links da navbar (alinhados à esquerda do centro) -->
     <ul class="nav-links" role="menubar">
@@ -114,82 +114,9 @@
     </section>
   </main>
 
-  <!-- Script leve para controlar abertura dos painéis (hover + keyboard + touch) -->
-  <script>
-    (function(){
-      const links = document.querySelectorAll('.nav-links .has-dropdown > a');
-      const panels = {
-        'Aprendizado': document.getElementById('panel-aprendizado'),
-        'Ferramentas': document.getElementById('panel-ferramentas'),
-        'Instrumentos': document.getElementById('panel-instrumentos')
-      };
-
-      function openPanel(name, anchor){
-        const panel = panels[name];
-        if(!panel) return;
-        // posiciona o painel horizontalmente com base no anchor
-        const rect = anchor.getBoundingClientRect();
-        panel.style.display = 'block';
-        panel.style.opacity = '0';
-        panel.style.transform = 'translateY(6px)';
-        // centraliza o painel na largura do conteúdo quando possível
-        const containerRect = document.querySelector('.navbar').getBoundingClientRect();
-        const left = Math.max(8, rect.left + (rect.width/2) - (containerRect.left + 160));
-        panel.style.left = `${left}px`;
-        panel.setAttribute('aria-hidden','false');
-        anchor.setAttribute('aria-expanded','true');
-        requestAnimationFrame(()=> {
-          panel.style.opacity = '1';
-          panel.style.transform = 'translateY(0)';
-        });
-      }
-
-      function closePanel(name, anchor){
-        const panel = panels[name];
-        if(!panel) return;
-        panel.style.opacity = '0';
-        panel.style.transform = 'translateY(6px)';
-        anchor.setAttribute('aria-expanded','false');
-        panel.setAttribute('aria-hidden','true');
-        setTimeout(()=>{ panel.style.display = 'none'; }, 220);
-      }
-
-      links.forEach(a=>{
-        const text = a.textContent.trim();
-        // hover
-        a.addEventListener('mouseenter', ()=> openPanel(text, a));
-        a.addEventListener('mouseleave', ()=> closePanel(text, a));
-        // keep open when entering panel
-        const panel = panels[text];
-        if(panel){
-          panel.addEventListener('mouseenter', ()=> openPanel(text, a));
-          panel.addEventListener('mouseleave', ()=> closePanel(text, a));
-        }
-        // keyboard (focus)
-        a.addEventListener('focus', ()=> openPanel(text, a));
-        a.addEventListener('blur', ()=> closePanel(text, a));
-        // touch/click toggle for mobile
-        a.addEventListener('click', (e)=>{
-          if(window.innerWidth <= 700){
-            e.preventDefault();
-            const isOpen = a.getAttribute('aria-expanded') === 'true';
-            if(isOpen) closePanel(text, a); else openPanel(text, a);
-          }
-        });
-      });
-
-      // fechar todos ao clicar fora
-      document.addEventListener('click', (e)=>{
-        if(!e.target.closest('.nav-links') && !e.target.closest('.dropdown-panel')) {
-          Object.keys(panels).forEach(name=>{
-            const panel = panels[name];
-            if(panel) { panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
-          });
-          links.forEach(a=> a.setAttribute('aria-expanded','false'));
-        }
-      });
-    })();
-  </script>
+  <!-- Inline hover script removido — usamos script.js (click-based) -->
+  <!-- Mantido apenas para referência; comportamento do dropdown agora é controlado por script.js -->
+  <!-- <script> REMOVED </script> -->
 
   <script src="script.js"></script>
 </body>

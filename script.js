@@ -1,4 +1,5 @@
-// Aguarda o carregamento completo do conteúdo da página
+// Atualizado: dropdown refeito com base no projeto "responsive-dropdown-menu-2"
+// (mantive o código mobile/sidebar existente no topo)
 document.addEventListener('DOMContentLoaded', function() {
 
   // ---------- mobile / sidebar (preservado) ----------
@@ -49,47 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
   if (mobileLinksWrap) mobileLinksWrap.addEventListener('click', (e) => { if (e.target.tagName === 'A') closeMobile(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
 
-  // ---------- Dropdown panels (refeito com base no exemplo "responsive-dropdown-menu-2") ----------
+  // ---------- Dropdown panels — simplified: open on CLICK (no hover) ----------
   (function(){
-    const CLOSE_DELAY_LONG = 650;   // dá tempo para o cursor atravessar o espaço até o painel
-    const CLOSE_DELAY_SHORT = 180;  // usado ao sair do painel
     const navbar = document.querySelector('.navbar');
-
-    const dropdownItems = Array.from(document.querySelectorAll('.nav-links .has-dropdown'));
+    const anchors = Array.from(document.querySelectorAll('.nav-links .has-dropdown > a'));
     const panels = Array.from(document.querySelectorAll('.dropdown-panel'));
 
-    // map name -> panel element (data-for or id fallback)
+    // map panels by name (data-for / id fallback)
     const panelsByName = {};
     panels.forEach(p => {
       const name = (p.dataset.for || p.getAttribute('data-for') || p.id.replace('panel-','')).trim();
       panelsByName[name] = p;
-      p.style.display = 'none';
+      // ensure initial hidden state
+      p.style.display = p.style.display || 'none';
       p.setAttribute('aria-hidden','true');
-      p.style.position = 'fixed';
+      p.style.position = p.style.position || 'fixed';
       p.style.zIndex = 1100;
-      p.dataset.open = 'false';
     });
-
-    // helper timers/flags
-    const timers = new Map(); // name -> timeout id
-
-    function clearTimer(name){
-      const t = timers.get(name);
-      if(t){ clearTimeout(t); timers.delete(name); }
-    }
-
-    function isPointerOver(elem){
-      if(!elem) return false;
-      const r = elem.getBoundingClientRect();
-      // se r for inválido
-      if(r.width === 0 && r.height === 0) return false;
-      const x = lastPointer.x, y = lastPointer.y;
-      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
-    }
-
-    // acompanha posição do ponteiro global (usado na verificação de fechamento)
-    const lastPointer = { x: -1, y: -1 };
-    document.addEventListener('pointermove', (ev) => { lastPointer.x = ev.clientX; lastPointer.y = ev.clientY; }, { passive: true });
 
     function positionPanelUnderAnchor(panel, anchor){
       if(!panel || !anchor) return;
@@ -106,119 +83,90 @@ document.addEventListener('DOMContentLoaded', function() {
     function openPanel(name, anchor){
       const panel = panelsByName[name];
       if(!panel) return;
-      clearTimer(name);
+      // close other panels first
+      Object.keys(panelsByName).forEach(n => {
+        if(n !== name) closePanel(n);
+      });
       positionPanelUnderAnchor(panel, anchor);
       panel.style.display = 'block';
-      // força reflow para transições funcionarem
       void panel.offsetHeight;
       panel.classList.add('open');
       panel.setAttribute('aria-hidden','false');
-      panel.dataset.open = 'true';
       anchor.setAttribute('aria-expanded','true');
     }
 
-    function closePanel(name, anchor){
+    function closePanel(name){
       const panel = panelsByName[name];
       if(!panel) return;
-      clearTimer(name);
+      const anchor = Array.from(document.querySelectorAll('.nav-links .has-dropdown > a'))
+        .find(a => a.textContent.trim() === name);
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden','true');
-      panel.dataset.open = 'false';
       if(anchor) anchor.setAttribute('aria-expanded','false');
-      setTimeout(()=> { if(panel.dataset.open === 'false') panel.style.display = 'none'; }, 200);
+      setTimeout(()=> { if(!panel.classList.contains('open')) panel.style.display = 'none'; }, 180);
     }
 
-    // schedule close with live pointer check
-    function scheduleCloseWithPointerCheck(name, anchor, delay){
-      clearTimer(name);
-      const id = setTimeout(() => {
-        const panel = panelsByName[name];
-        // se ponteiro estiver sobre anchor ou panel, cancela fechamento
-        if(isPointerOver(panel) || isPointerOver(anchor)) {
-          clearTimer(name);
-          return;
-        }
-        closePanel(name, anchor);
-      }, delay);
-      timers.set(name, id);
+    function togglePanel(name, anchor){
+      const panel = panelsByName[name];
+      if(!panel) return;
+      const isOpen = panel.style.display !== 'none' && panel.classList.contains('open');
+      if(isOpen) closePanel(name); else openPanel(name, anchor);
     }
 
-    // liga eventos nos itens dropdown e painéis
-    dropdownItems.forEach(item => {
-      const anchor = item.querySelector('a');
-      if(!anchor) return;
-      const name = anchor.textContent.trim();
+    // attach click handlers to anchors (open on click)
+    anchors.forEach(a => {
+      const name = a.textContent.trim();
       const panel = panelsByName[name];
 
-      // mouse entra no link -> abre imediatamente
-      anchor.addEventListener('pointerenter', () => {
-        openPanel(name, anchor);
-      });
-
-      // mouse sai do link -> agenda fechamento longo (permite alcançar o painel)
-      anchor.addEventListener('pointerleave', () => {
-        scheduleCloseWithPointerCheck(name, anchor, CLOSE_DELAY_LONG);
-      });
-
-      // foco/blur para teclado
-      anchor.addEventListener('focus', () => openPanel(name, anchor));
-      anchor.addEventListener('blur', () => scheduleCloseWithPointerCheck(name, anchor, CLOSE_DELAY_SHORT));
-
-      // clique mobile toggle
-      anchor.addEventListener('click', (e) => {
-        if(window.innerWidth <= 900){
+      // click toggles panel (prevents default only if panel exists)
+      a.addEventListener('click', (e) => {
+        if(panel){
           e.preventDefault();
-          const isOpen = panelsByName[name] && panelsByName[name].dataset.open === 'true';
-          if(isOpen) closePanel(name, anchor); else openPanel(name, anchor);
+          togglePanel(name, a);
         }
       });
 
-      if(!panel) return;
-
-      // quando ponteiro entra no painel, cancela qualquer timer e garante manter aberto
-      panel.addEventListener('pointerenter', () => {
-        clearTimer(name);
-        positionPanelUnderAnchor(panel, anchor);
-        // garante que o painel esteja visível caso timer de abertura ainda não tenha terminado
-        if(panel.dataset.open !== 'true') {
-          panel.style.display = 'block';
-          void panel.offsetHeight;
-          panel.classList.add('open');
-          panel.setAttribute('aria-hidden','false');
-          panel.dataset.open = 'true';
-          anchor.setAttribute('aria-expanded','true');
+      // keyboard: Enter / Space toggle
+      a.addEventListener('keydown', (e) => {
+        if(panel && (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')) {
+          e.preventDefault();
+          togglePanel(name, a);
         }
       });
-
-      // quando sai do painel, agenda fechamento curto
-      panel.addEventListener('pointerleave', () => {
-        scheduleCloseWithPointerCheck(name, anchor, CLOSE_DELAY_SHORT);
-      });
-
-      // fechar ao clicar em um link interno (navegação)
-      panel.addEventListener('click', (ev) => {
-        if(ev.target.tagName === 'A') closePanel(name, anchor);
-      });
-
-      // acessibilidade (teclado)
-      panel.addEventListener('focusin', () => clearTimer(name));
-      panel.addEventListener('focusout', () => scheduleCloseWithPointerCheck(name, anchor, CLOSE_DELAY_SHORT));
     });
 
-    // reposicionar painéis abertos quando rolar/redimensionar para seguirem a navbar
-    function repositionAll(){
-      dropdownItems.forEach(item => {
-        const a = item.querySelector('a');
-        if(!a) return;
-        const name = a.textContent.trim();
-        const panel = panelsByName[name];
-        if(panel && panel.dataset.open === 'true') positionPanelUnderAnchor(panel, a);
+    // clicking a link inside a panel closes that panel
+    panels.forEach(p => {
+      p.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A') {
+          // find which panel this is
+          const name = (p.dataset.for || p.getAttribute('data-for') || p.id.replace('panel-','')).trim();
+          closePanel(name);
+        }
+      });
+    });
+
+    // click outside closes all panels
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-links') && !e.target.closest('.dropdown-panel')) {
+        Object.keys(panelsByName).forEach(n => closePanel(n));
+      }
+    });
+
+    // reposition open panels on scroll/resize
+    function repositionOpenPanels(){
+      Object.keys(panelsByName).forEach(n => {
+        const panel = panelsByName[n];
+        if(panel && panel.style.display !== 'none' && panel.classList.contains('open')) {
+          const anchor = Array.from(document.querySelectorAll('.nav-links .has-dropdown > a'))
+            .find(a => a.textContent.trim() === n);
+          positionPanelUnderAnchor(panel, anchor);
+        }
       });
     }
-    window.addEventListener('scroll', repositionAll, { passive: true });
-    window.addEventListener('resize', repositionAll, { passive: true });
-
+    window.addEventListener('scroll', repositionOpenPanels, { passive: true });
+    window.addEventListener('resize', repositionOpenPanels, { passive: true });
   })();
 
-  // ---------- rest of existing code (if any) ----------
+  // ---------- rest of existing code (se tiver) ----------
 });
