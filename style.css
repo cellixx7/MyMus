@@ -502,7 +502,7 @@ main > section {
   z-index: 900;
 }
 .dropdown-panel {
-  position: absolute;
+  position: fixed; /* fixed so top/left are viewport coordinates and follow navbar */
   min-width: 220px;
   max-width: 560px;
   background: #ffffff;
@@ -515,6 +515,14 @@ main > section {
   transform: translateY(6px);
   transition: opacity 180ms ease, transform 180ms ease;
   pointer-events: auto;
+  z-index: 1100;
+}
+
+/* When panel opens add .open */
+.dropdown-panel.open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* pequenos ajustes visuais para o conteúdo futuro */
@@ -522,13 +530,6 @@ main > section {
   min-height: 42px;
   opacity: 0.9;
   display: none; /* continuar escondido até preenchido / aberto */
-}
-
-/* quando aberto, controle via script aplicará display:block e animação */
-.dropdown-panel.open {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* reduz o tamanho do logo central para combinar com navbar mais limpa */
@@ -541,7 +542,73 @@ main > section {
 /* avatar estilo aplicado (SVG já no HTML) */
 .avatar-svg { display: block; border-radius: 50%; }
 
-/* Ajustes responsivos e comportamento mobile: clique abre painel */
+/* Aprendizado — grid de cards dentro do dropdown */
+.dropdown-panel#panel-aprendizado {
+  /* mantém oculto por padrão; script controla display/open */
+  min-width: 260px;
+  max-width: 720px;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.dropdown-panel#panel-aprendizado .learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Card quadrado/retangular visual limpo */
+.learn-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #ffffff;
+  color: #0b1a2b;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(3,22,56,0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  min-height: 110px;
+}
+
+.learn-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-family: 'Work Sans', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: #102840;
+}
+
+.learn-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(16,40,64,0.72);
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* Hover/Focus */
+.learn-card:hover,
+.learn-card:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 34px rgba(3,22,56,0.10);
+  outline: none;
+}
+
+/* Responsividade do painel */
+@media (max-width: 520px) {
+  .dropdown-panel#panel-aprendizado .learn-grid {
+    grid-template-columns: 1fr;
+  }
+  .dropdown-panel#panel-aprendizado {
+    max-width: calc(100% - 32px);
+    left: 16px !important; /* ajuda posicionamento quando script calcula left */
+  }
+}
+
 @media (max-width: 700px) {
   .nav-links { display: none; } /* manter escondido para mobile - botão abre menu */
   .dropdown-panels { display: none; }
