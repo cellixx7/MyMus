@@ -81,5 +81,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Funcionalidades adicionais podem ser adicionadas aqui
+
+    // Clona links da nav principal para o painel móvel (mantém atualizações centralizadas)
+    const desktopNav = document.querySelector('.nav-links');
+    const mobileLinksWrap = document.getElementById('mobileLinksWrap');
+    if (desktopNav && mobileLinksWrap) {
+        const clone = desktopNav.cloneNode(true);
+        clone.classList.add('mobile-nav');
+        mobileLinksWrap.appendChild(clone);
+    }
+
+    function openMobile() {
+        mobileSidebar.classList.add('open');
+        mobileOverlay.classList.add('show');
+        mobileSidebar.setAttribute('aria-hidden', 'false');
+        mobileOverlay.setAttribute('aria-hidden', 'false');
+        // trava scroll do body
+        document.documentElement.style.overflow = 'hidden';
+    }
+
+    function closeMobile() {
+        mobileSidebar.classList.remove('open');
+        mobileOverlay.classList.remove('show');
+        mobileSidebar.setAttribute('aria-hidden', 'true');
+        mobileOverlay.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+    }
+
+    // eventos
+    if (menuBtn) menuBtn.addEventListener('click', openMobile);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobile);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobile);
+
+    // fecha ao clicar em qualquer link do menu móvel
+    mobileLinksWrap.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') closeMobile();
+    });
+
+    // fecha com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobile();
+    });
 });
 
