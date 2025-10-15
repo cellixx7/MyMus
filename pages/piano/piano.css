@@ -1,0 +1,92 @@
+/* Estilos reutilizáveis do piano (extraídos de notas.css) */
+.piano {
+  position: relative;
+  margin: 2rem auto;
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  max-width: 1000px;
+  height: 200px;
+  overflow-x: auto;
+}
+
+.keys {
+  display: flex;
+  position: relative;
+  height: 100%;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+/* Teclas brancas */
+.key.white {
+  width: 48px;
+  height: 100%;
+  background: linear-gradient(to bottom, #fff, #eaeaea);
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #555;
+  margin-right: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.08ms, scale 0.08ms;
+  z-index: 1;
+  padding-bottom: 8px;
+}
+
+.key.white.active,
+.key.white.pressed {
+  background: #a1e3ff;
+  scale: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+/* Teclas pretas */
+.key.black {
+  width: 32px;
+  height: 60%;
+  background: linear-gradient(to bottom, #333, #000);
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
+  transition: background 0.08s;
+  color: #fff;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  padding-bottom:8px;
+}
+
+.key.black.active,
+.key.black.pressed {
+  background: #3573d6;
+}
+
+/* label (opcional) */
+.key-label {
+  font-size: 11px;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Resultado textual */
+.resultado-nota {
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #3573d6;
+  font-weight: 700;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .piano { height: 150px; }
+  .key.white { width: 36px; }
+  .key.black { width: 22px; }
+}
