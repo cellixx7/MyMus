@@ -10,18 +10,41 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Barra principal">
+    <!-- Botão do menu (logo pequeno) -->
     <button class="menu-btn" aria-label="Abrir menu">
-      <span class="hamburger"></span>
+      <img src="../../assets/Design MyMus/logo-navbar.png" alt="MyMus" class="menu-logo">
     </button>
-    <ul class="nav-links">
-      <li><a href="../../index.html">Início</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#contato">Contato</a></li> 
+
+    <!-- Links da navbar (alinhados à esquerda do centro) -->
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a role="menuitem" href="../../index.html">Início</a></li>
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" href="#aprendizado" aria-haspopup="true" aria-expanded="false">
+          Aprendizado <span class="nav-arrow" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" href="#ferramentas" aria-haspopup="true" aria-expanded="false">
+          Ferramentas <span class="nav-arrow" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" href="#instrumentos" aria-haspopup="true" aria-expanded="false">
+          Instrumentos <span class="nav-arrow" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li role="none"><a role="menuitem" href="#sobre">Sobre</a></li>
     </ul>
-    <div class="logo-placeholder">
-      <img src="logo-navbar.png" alt="Logo MyMus Navbar" height="50" width="50">
-    </div>
+
+    <!-- Avatar (sem login) no canto direito -->
+    <button class="avatar-btn" aria-label="Perfil">
+      <svg class="avatar-svg" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs><linearGradient id="gA" x1="0" x2="1"><stop offset="0" stop-color="#4f8cff"/><stop offset="1" stop-color="#3573d6"/></linearGradient></defs>
+        <circle cx="12" cy="8" r="3.2" fill="url(#gA)"></circle>
+        <path d="M4 20c0-3.3 2.7-6 6-6h4c3.3 0 6 2.7 6 6" fill="none" stroke="url(#gA)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </nav>
 
   <aside class="sidebar">
@@ -59,6 +82,42 @@
 
       <div id="resultadoNota" class="resultado-nota">Clique ou pressione uma tecla!</div>
     </section>
+
+    <!-- Dropdown panels (vazios por enquanto, serão preenchidos depois) -->
+    <div class="dropdown-panels" aria-hidden="true">
+      <div class="dropdown-panel" id="panel-aprendizado" data-for="Aprendizado" aria-hidden="true">
+        <div class="learn-grid" role="list">
+          <a href="pages/aprendizados/notas.html" class="learn-card" role="listitem" aria-label="Notas">
+            <h3>Notas</h3>
+            <p>Saiba diferenciar cada nota musical</p>
+          </a>
+
+          <a href="pages/aprendizados/acordes.html" class="learn-card" role="listitem" aria-label="Acordes">
+            <h3>Acordes</h3>
+            <p>Saiba montar e descobrir acordes musicais</p>
+          </a>
+
+          <a href="pages/aprendizados/intervalos.html" class="learn-card" role="listitem" aria-label="Intervalo">
+            <h3>Intervalo</h3>
+            <p>Saiba os intervalos musicais de cada nota</p>
+          </a>
+
+          <a href="pages/aprendizados/termos.html" class="learn-card" role="listitem" aria-label="Termos Musicais">
+            <h3>Termos Musicais</h3>
+            <p>Saiba quais os termos musicais</p>
+          </a>
+
+          <a href="pages/aprendizados/circulo-quintas.html" class="learn-card" role="listitem" aria-label="Círculo de Quintas">
+            <h3>Círculo de Quintas</h3>
+            <p>Saiba quais são o círculo de quintas</p>
+          </a>
+        </div>
+      </div>
+      <div class="dropdown-panel" id="panel-ferramentas" data-for="Ferramentas" aria-hidden="true">
+      </div>
+      <div class="dropdown-panel" id="panel-instrumentos" data-for="Instrumentos" aria-hidden="true">
+      </div>
+    </div>
   </main>
 
   <script src="script-notas.js"></script>
